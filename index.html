@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Учёт лидов — карты</title>
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Лиды">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#2563eb">
+<link rel="apple-touch-icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAB6UlEQVR42u3dyRGCQBBAUZkiBFPQxDQsIzMFDcIDVzxQpb3Aewmg47cpcJnpcnudYM2wBIgDcSAOxIE4EAfiQByIA3GAOBAH4kAciANxIA7EgTgQB4gDcSAOxIE4EAfiQByIA3GAOBAH4kAciANxIA7EgTgQB+IAcSAOxIE4EAfiQByIA3FwPHP6I3g+zl6Gb673d+LRp8QNAGVRPJGcOGTRIpGhjC7i120oQx8l4lBGrzV0KUuBOIyNditpcpAdh7HRcT1NDsSBOBAH4kAciANxsBeZX/bB5EAciANxgDgQB+JAHIgDcSAOxIE4EAfiAHGwQdDfPvnF288F/JeLyYE4EAfiQByIA3EgDsSBOBAHiANxIA7+aS74mMI2FvFFgk5xBO83sxxOIk4rdI4jayez3E32xIE4EAfiQBxlZF1SupQ1Odis1k2w5U3sDqk4vGZOK4gDcSAOEAfioHAcPhbvuJ4mBwXiMDzaraTJQY04DI9eazh2/NyU0e+0oo8u65a56bBPX4u/nfJ3pJZI2Slru3JcyiIOxIE4EAfiQByIA3EgDhAH4kAciANxIA7EgTgQB+IAcSAOxIE4EAfiQByIA3EgDhAH4kAciANxIA7EgTgQB+JAHCAOxIE4EAfiQByIA3EgDg7oA5VxTx0EX2/kAAAAAElFTkSuQmCC">
+<link rel="icon" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAIAAACyr5FlAAAB6UlEQVR42u3dyRGCQBBAUZkiBFPQxDQsIzMFDcIDVzxQpb3Aewmg47cpcJnpcnudYM2wBIgDcSAOxIE4EAfiQByIA3GAOBAH4kAciANxIA7EgTgQB4gDcSAOxIE4EAfiQByIA3GAOBAH4kAciANxIA7EgTgQB+IAcSAOxIE4EAfiQByIA3FwPHP6I3g+zl6Gb673d+LRp8QNAGVRPJGcOGTRIpGhjC7i120oQx8l4lBGrzV0KUuBOIyNditpcpAdh7HRcT1NDsSBOBAH4kAciANxsBeZX/bB5EAciANxgDgQB+JAHIgDcSAOxIE4EAfiAHGwQdDfPvnF288F/JeLyYE4EAfiQByIA3EgDsSBOBAHiANxIA7+aS74mMI2FvFFgk5xBO83sxxOIk4rdI4jayez3E32xIE4EAfiQBxlZF1SupQ1Odis1k2w5U3sDqk4vGZOK4gDcSAOEAfioHAcPhbvuJ4mBwXiMDzaraTJQY04DI9eazh2/NyU0e+0oo8u65a56bBPX4u/nfJ3pJZI2Slru3JcyiIOxIE4EAfiQByIA3EgDhAH4kAciANxIA7EgTgQB+IAcSAOxIE4EAfiQByIA3EgDhAH4kAciANxIA7EgTgQB+JAHCAOxIE4EAfiQByIA3EgDg7oA5VxTx0EX2/kAAAAAElFTkSuQmCC">
+
+<style>
+:root{--bg:#f3f4f7;--card:#ffffff;--tx:#14171c;--mu:#6b7280;--bd:#e3e6ea;--ac:#2563eb;--ok:#16a34a;--bad:#dc2626;--warn:#d97706}
+@media (prefers-color-scheme:dark){:root{--bg:#0f1115;--card:#181b21;--tx:#eceef2;--mu:#9aa1ad;--bd:#2a2e36;--ac:#5b8cff;--ok:#34d399;--bad:#f87171;--warn:#fbbf24}}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+html,body{margin:0;background:var(--bg);color:var(--tx)}
+body{font:16px/1.4 -apple-system,system-ui,Roboto,sans-serif;padding:12px;padding-top:calc(12px + env(safe-area-inset-top,0px));padding-bottom:calc(30px + env(safe-area-inset-bottom,0px));max-width:760px;margin:0 auto}
+button,input,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.tabs{display:flex;gap:6px;margin-bottom:10px}
+.tabs button{flex:1;padding:12px 6px;border:1px solid var(--bd);border-radius:12px;background:var(--card);font-weight:600}
+.tabs button.on{background:var(--ac);border-color:var(--ac);color:#fff}
+.top{display:flex;gap:8px}
+input[type=search],input[type=text],input[type=tel],input[type=date],textarea{width:100%;padding:12px;border:1px solid var(--bd);border-radius:12px;background:var(--card);font-size:16px}
+.add{flex:none;padding:0 18px;border:0;border-radius:12px;background:var(--ac);color:#fff;font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:10px 0}
+.chip{padding:8px 13px;border-radius:99px;border:1px solid var(--bd);background:var(--card);font-size:14px}
+.chip.on{background:var(--tx);color:var(--bg);border-color:var(--tx)}
+.cnt{color:var(--mu);font-size:13px;margin:0 2px 8px}
+.item{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:10px}
+.nm{font-weight:700;font-size:17px;word-break:break-word}
+.links{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.lk{display:inline-block;padding:9px 13px;border-radius:10px;border:1px solid var(--bd);color:var(--ac);text-decoration:none;font-weight:600;font-size:15px;background:none}
+.lk.g{color:var(--ok)}
+.lk.n{color:var(--warn)}
+.meta{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-size:13px;color:var(--mu)}
+.meta b{display:block;color:var(--tx);font-weight:500;font-size:14px}
+.note{margin-top:10px;padding:9px 11px;border-radius:10px;background:var(--bg);font-size:14px;white-space:pre-wrap;word-break:break-word}
+.ping{margin-top:8px;font-size:13px;color:var(--warn);font-weight:600}
+.st{display:flex;gap:8px;margin-top:10px}
+.st button{flex:1;padding:11px 6px;border-radius:10px;border:1px solid var(--bd);background:none;font-size:14px;font-weight:600;color:var(--mu)}
+.st button.y{border-color:var(--ok);color:var(--ok)}
+.acts{display:flex;gap:18px;margin-top:10px}
+.acts button{border:0;background:none;color:var(--mu);font-size:14px;padding:4px 0}
+.acts .d{color:var(--bad)}
+.empty{text-align:center;color:var(--mu);padding:40px 0}
+#fm{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:14px;margin-bottom:12px}
+#fm h2{margin:0 0 4px;font-size:18px}
+#fm label{display:block;font-size:13px;color:var(--mu);margin:12px 0 4px}
+.two{display:flex;gap:10px}
+.two div{flex:1}
+.hint{font-size:12px;color:var(--mu);margin-top:4px}
+.chk{display:flex;gap:10px;margin-top:14px}
+.chk label{flex:1;display:flex;gap:8px;align-items:center;margin:0;padding:12px;border:1px solid var(--bd);border-radius:12px;color:var(--tx);font-size:15px}
+.chk input{width:20px;height:20px}
+.fb{display:flex;gap:10px;margin-top:16px}
+.fb button{flex:1;padding:14px;border-radius:12px;border:1px solid var(--bd);background:none;font-weight:700}
+.fb .p{background:var(--ac);border-color:var(--ac);color:#fff;flex:2}
+.bk{display:flex;gap:8px;margin-top:18px}
+.bk button{flex:1;padding:12px;border-radius:12px;border:1px solid var(--bd);background:var(--card);font-size:14px;color:var(--mu)}
+</style>
+</head>
+<body>
+<div class="tabs"><button class="on" id="t1">Все лиды</button><button id="t2">Забрали + цель ✅</button></div>
+<div class="top"><input type="search" id="q" placeholder="Поиск: имя, @тг, телефон, карта"><button class="add" id="add">＋ Лид</button></div>
+
+<form id="fm" autocomplete="off" hidden>
+  <h2 id="ft">Новый лид</h2>
+  <label>Ссылка на Telegram (вставь сюда первой)</label>
+  <input type="text" id="lk" placeholder="https://t.me/…" autocapitalize="off" autocorrect="off">
+  <label>Юзернейм</label>
+  <input type="text" id="tg" placeholder="@username" autocapitalize="off" autocorrect="off">
+  <div class="hint">Нет юзернейма — оставь пустым, заполни телефон и заметку</div>
+  <label>ФИО</label><input type="text" id="name">
+  <label>Телефон</label><input type="tel" id="ph" placeholder="+7…">
+  <label>Название карты</label><input type="text" id="card">
+  <div class="two"><div><label>Оформлена</label><input type="date" id="d1"></div><div><label>Доставка</label><input type="date" id="d2"></div></div>
+  <label>Заметка: как найти человека</label>
+  <textarea id="note" rows="3" placeholder="Где общались, имя в тг, ID, кто привёл"></textarea>
+  <div class="chk"><label><input type="checkbox" id="pk"> Забрал карту</label><label><input type="checkbox" id="tr"> Цель выполнена</label></div>
+  <div class="fb"><button type="button" id="cancel">Отмена</button><button type="submit" class="p">Сохранить</button></div>
+</form>
+
+<div class="chips" id="chips"></div>
+<div class="cnt" id="cnt"></div>
+<div id="list"></div>
+<div class="bk"><button id="exp">Копировать бэкап</button><button id="imp">Восстановить</button></div>
+
+<script>
+(function(){
+var KEY="leads_v1",leads=[],tab=1,flt="all",editId=null;
+function $(i){return document.getElementById(i)}
+function load(){try{var s=localStorage.getItem(KEY);leads=s?JSON.parse(s):[]}catch(e){leads=[]}
+  if(!leads||leads.length===undefined)leads=[];
+  for(var i=0;i<leads.length;i++){var t=leads[i].tg||"";leads[i].tg=/^@(https?|httpst?|t)$/i.test(t)?"":normTg(t)}}
+function save(){try{localStorage.setItem(KEY,JSON.stringify(leads))}catch(e){}}
+function esc(s){return String(s==null?"":s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]})}
+function fd(d){if(!d)return "—";var p=d.split("-");return p.length===3?p[2]+"."+p[1]+"."+p[0]:d}
+function today(){var d=new Date();return d.getFullYear()+"-"+("0"+(d.getMonth()+1)).slice(-2)+"-"+("0"+d.getDate()).slice(-2)}
+function normTg(v){
+  v=String(v||"").replace(/[\u200B-\u200D\uFEFF\u00A0]/g,"").replace(/^\s+|\s+$/g,"");
+  var m=v.match(/^@?(?:[a-z][a-z0-9+.\-]*:\/\/)?(?:www\.)?(?:t\.me|telegram\.me|telegram\.dog)\/(?:s\/)?([A-Za-z][A-Za-z0-9_]{2,})/i);
+  if(m)return "@"+m[1];
+  if(/:\/\/|t\.me\/|telegram\.me\//i.test(v))return "";
+  v=v.replace(/^[@\uFF20]+/,"").split(/[\/?\s,;]/)[0].replace(/[^A-Za-z0-9_]/g,"");
+  return v?"@"+v:"";
+}
+function isUrl(v){return /:\/\/|t\.me\/|telegram\.me\//i.test(v||"")}
+function digits(p){return (p||"").replace(/\D/g,"").replace(/^8(?=\d{10}$)/,"7")}
+function find(id){for(var i=0;i<leads.length;i++)if(String(leads[i].id)===String(id))return leads[i]}
+var FL=[["all","Все"],["wait","Ждут карту"],["pick","Забрали"],["nou","Без юзернейма"]];
+function match(l){
+  var dn=l.pk&&l.tr;
+  if(tab===2&&!dn)return false;
+  if(tab===1){if(dn)return false;if(flt==="wait"&&l.pk)return false;if(flt==="pick"&&!l.pk)return false;if(flt==="nou"&&l.tg)return false}
+  var q=$("q").value.replace(/^\s+|\s+$/g,"").toLowerCase();
+  return !q||[l.tg,l.name,l.ph,l.card,l.note,l.link].join(" ").toLowerCase().indexOf(q)>-1;
+}
+function render(){
+  var c="";
+  if(tab===1)for(var i=0;i<FL.length;i++)c+='<button type="button" class="chip'+(flt===FL[i][0]?' on':'')+'" data-f="'+FL[i][0]+'">'+FL[i][1]+'</button>';
+  $("chips").innerHTML=c;
+  var rows=leads.filter(match).sort(function(a,b){return (b.d1||"").localeCompare(a.d1||"")||b.id-a.id});
+  var done=0;for(var j=0;j<leads.length;j++)if(leads[j].pk&&leads[j].tr)done++;
+  $("cnt").textContent="Показано: "+rows.length+" · всего: "+leads.length+" · выполнили цель: "+done;
+  var t=today(),h="";
+  rows.forEach(function(l){
+    var ln="";
+    if(l.tg)ln+='<a class="lk" href="https://t.me/'+esc(l.tg.slice(1))+'">✈ '+esc(l.tg)+'</a><button type="button" class="lk g" data-cp="'+esc(l.tg)+'">Копировать</button>';
+    else ln+='<span class="lk n">Нет юзернейма</span>';
+    if(l.link){var hu=/^(https?|tg):/i.test(l.link)?l.link:"https://"+l.link;ln+='<a class="lk" href="'+esc(hu)+'">🔗 Ссылка</a><button type="button" class="lk g" data-cp="'+esc(hu)+'">Копировать ссылку</button>'}
+    var dg=digits(l.ph);
+    if(dg)ln+='<a class="lk g" href="tel:+'+dg+'">📞 '+esc(l.ph)+'</a>';
+    h+='<div class="item"><div class="nm">'+esc(l.name||l.tg||l.ph||"Без имени")+'</div><div class="links">'+ln+'</div>'
+    +'<div class="meta"><div>Карта<b>'+esc(l.card||"—")+'</b></div><div>Оформлена<b>'+fd(l.d1)+'</b></div><div>Доставка<b>'+fd(l.d2)+'</b></div></div>'
+    +(l.note?'<div class="note">'+esc(l.note)+'</div>':'')
+    +((l.d2&&l.d2<=t&&!l.pk)?'<div class="ping">⏰ Карта уже должна быть доставлена — напиши человеку</div>':'')
+    +'<div class="st"><button type="button" class="'+(l.pk?'y':'')+'" data-p="'+l.id+'">'+(l.pk?'✓ Забрал карту':'Забрал карту?')+'</button><button type="button" class="'+(l.tr?'y':'')+'" data-t="'+l.id+'">'+(l.tr?'✓ Цель выполнена':'Цель выполнена?')+'</button></div>'
+    +'<div class="acts"><button type="button" data-e="'+l.id+'">Изменить</button><button type="button" class="d" data-x="'+l.id+'">Удалить</button></div></div>';
+  });
+  $("list").innerHTML=h||'<div class="empty">Ничего нет</div>';
+}
+function openForm(l){
+  editId=l?l.id:null;l=l||{};
+  $("ft").textContent=l.id?"Изменить лид":"Новый лид";
+  $("lk").value=l.link||"";$("tg").value=l.tg||"";$("name").value=l.name||"";$("ph").value=l.ph||"";$("card").value=l.card||"";
+  $("d1").value=l.d1||today();$("d2").value=l.d2||"";$("note").value=l.note||"";
+  $("pk").checked=!!l.pk;$("tr").checked=!!l.tr;
+  $("fm").hidden=false;
+  try{window.scrollTo(0,0)}catch(e){}
+}
+$("add").onclick=function(){openForm(null)};
+$("cancel").onclick=function(){$("fm").hidden=true};
+$("lk").onblur=function(){var v=this.value.replace(/^\s+|\s+$/g,"");if(v&&!$("tg").value)$("tg").value=normTg(v)};
+$("tg").onblur=function(){var v=this.value,n=normTg(v);if(!n&&isUrl(v)&&!$("lk").value)$("lk").value=v.replace(/^\s+|\s+$/g,"");this.value=n};
+$("fm").onsubmit=function(e){
+  e.preventDefault();
+  var lkv=$("lk").value.replace(/^\s+|\s+$/g,""),tgv=$("tg").value;
+  if(!tgv&&lkv)tgv=lkv;
+  if(!lkv&&isUrl(tgv)&&!normTg(tgv))lkv=tgv.replace(/^\s+|\s+$/g,"");
+  var o={link:lkv,tg:normTg(tgv),name:$("name").value.replace(/^\s+|\s+$/g,""),ph:$("ph").value.replace(/^\s+|\s+$/g,""),card:$("card").value.replace(/^\s+|\s+$/g,""),d1:$("d1").value,d2:$("d2").value,note:$("note").value.replace(/^\s+|\s+$/g,""),pk:$("pk").checked,tr:$("tr").checked};
+  if(!o.tg&&!o.link&&!o.name&&!o.ph&&!o.note){alert("Заполни хотя бы юзернейм, имя, телефон или заметку");return}
+  var dup=null;
+  for(var i=0;i<leads.length;i++){var l=leads[i];if(String(l.id)!==String(editId)&&((o.tg&&l.tg===o.tg)||(o.ph&&digits(l.ph)===digits(o.ph))))dup=l}
+  if(dup&&!confirm("Такой лид уже есть: "+(dup.name||dup.tg||dup.ph)+". Всё равно сохранить?"))return;
+  if(editId){var x=find(editId);for(var k in o)x[k]=o[k]}else{o.id=Date.now();leads.push(o)}
+  save();$("fm").hidden=true;render();
+};
+function copy(t,b){
+  var ok=false;
+  try{var a=document.createElement("textarea");a.value=t;a.style.position="fixed";a.style.opacity="0";document.body.appendChild(a);a.focus();a.select();a.setSelectionRange(0,99999);ok=document.execCommand("copy");document.body.removeChild(a)}catch(e){}
+  if(ok){if(b){var o=b.textContent;b.textContent="Скопировано ✓";setTimeout(function(){b.textContent=o},1500)}}
+  else prompt("Скопируйте:",t);
+}
+$("list").onclick=function(e){
+  var b=e.target;while(b&&b!==this&&b.tagName!=="BUTTON")b=b.parentNode;
+  if(!b||b===this)return;
+  var d=b.dataset,l;
+  if(d.cp)copy(d.cp,b);
+  else if(d.e)openForm(find(d.e));
+  else if(d.p){l=find(d.p);l.pk=!l.pk;save();render()}
+  else if(d.t){l=find(d.t);l.tr=!l.tr;save();render()}
+  else if(d.x){if(d.s){leads=leads.filter(function(z){return String(z.id)!==d.x});save();render()}else{b.dataset.s="1";b.textContent="Точно удалить?"}}
+};
+$("chips").onclick=function(e){var b=e.target;if(b.dataset&&b.dataset.f){flt=b.dataset.f;render()}};
+$("t1").onclick=function(){tab=1;$("t1").className="on";$("t2").className="";render()};
+$("t2").onclick=function(){tab=2;$("t2").className="on";$("t1").className="";render()};
+$("q").oninput=render;
+$("exp").onclick=function(){copy(JSON.stringify(leads),$("exp"))};
+$("imp").onclick=function(){var t=prompt("Вставьте резервную копию:");if(!t)return;try{var a=JSON.parse(t);if(a&&a.length!==undefined){leads=a;for(var i=0;i<leads.length;i++){leads[i].tg=normTg(leads[i].tg||"")}save();render()}}catch(e){alert("Не удалось прочитать копию")}};
+load();render();
+})();
+</script>
+</body>
+</html>
